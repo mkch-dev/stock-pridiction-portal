@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 const Header = () => {
     return (
@@ -6,8 +7,8 @@ const Header = () => {
             <nav className='navbar container pt-3 pb-3 mt-1 align-items-start'>
                 <a className='navbar-brand text-light' href="">Stock Prediction Portal</a>
                 <div>
-                    <a href="" className="btn btn-outline-info me-2">Login</a>
-                    <a href="" className="btn btn-info">Register</a>
+                    <Button text='Login' class="btn-outline-info" margin="me-2" />
+                    <Button text='Register' class="btn-info" />
                 </div>
             </nav>
         </>

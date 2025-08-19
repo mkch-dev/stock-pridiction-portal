@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 const Main = () => {
     return (
@@ -8,7 +9,7 @@ const Main = () => {
                     <h1 className='text-light'>Stock Prediction Portal</h1>
                     <p className="text-light lead">This application is just a demo of stock prediction using Machine Learning.
                         Backend is Django and using Keras and LTSM model</p>
-                    <a href="" className="btn btn-info me-2">Login</a>
+                    <Button text='Login now' class="btn-outline-info" />
                 </div>
             </div>
         </>

@@ -6,6 +6,7 @@ const Register = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState({})
 
     const handleRegistration = async (e) => {
         e.preventDefault()
@@ -20,6 +21,7 @@ const Register = () => {
             console.log('response.data ===> ', response.data)
             console.log('Registration successful')
         } catch (error) {
+            setErrors(error.response.data)
             console.log('Registration error: ', error.response.date)
         }
     }
@@ -30,9 +32,18 @@ const Register = () => {
                     <div className="col-md-6 bg-light-dark p-5 rounded">
                         <h3 className="text-light text-center mb-4">Create an account</h3>
                         <form onSubmit={handleRegistration}>
-                            <input type="text" placeholder="Username" className="form-control mb-3" value={username} onChange={(e) => setUsername(e.target.value)} />
-                            <input type="email" placeholder="Email address" className="form-control mb-3" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <input type="password" placeholder="Set password" className="form-control mb-5" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <div className='mb-3'>
+                                <input type="text" placeholder="Username" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                <small>{errors.username && <div className='text-danger'>{errors.username}</div>}</small>
+                            </div>
+                            <div className='mb-3'>
+                                <input type="email" placeholder="Email address" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <small>{errors.email && <div className='text-danger'>{errors.email}</div>}</small>
+                            </div>
+                            <div className='mb-5'>
+                                <input type="password" placeholder="Set password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <small>{errors.password && <div className='text-danger'>{errors.password}</div>}</small>
+                            </div>
                             <button type='submit' className='btn btn-info d-block mx-auto'>Register</button>
                         </form>
                     </div>

@@ -8,9 +8,11 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState({})
     const [success, setSuccess] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleRegistration = async (e) => {
         e.preventDefault()
+        setLoading(true)
 
         const userData = {
             username,
@@ -26,6 +28,8 @@ const Register = () => {
         } catch (error) {
             setErrors(error.response.data)
             console.log('Registration error: ', error.response.date)
+        } finally {
+            setLoading(false)
         }
     }
     return (
@@ -48,7 +52,12 @@ const Register = () => {
                                 <small>{errors.password && <div className='text-danger'>{errors.password}</div>}</small>
                             </div>
                             {success && <div className='alert alert-success'>Registration successful</div>}
-                            <button type='submit' className='btn btn-info d-block mx-auto'>Register</button>
+                            {loading ? (
+                                <button type='submit' className='btn btn-info d-block mx-auto' disabled>Please wait...</button>
+                            ) : (
+                                <button type='submit' className='btn btn-info d-block mx-auto'>Register</button>
+                            )}
+
                         </form>
                     </div>
                 </div>

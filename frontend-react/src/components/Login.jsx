@@ -1,20 +1,32 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+    const [error, setError] = useState('')
+
     async function handleLogin(e) {
         e.preventDefault()
+        setLoading(true)
         const userData = {
             username,
             password,
         }
         try {
             const response = await axios.post('http://localhost:8000/api/v1/token/', userData)
+            localStorage.setItem('accessToken', response.data.access)
+            localStorage.setItem('refreshToken', response.data.refresh)
+            console.log('User logged in successfully')
+            navigate('/')
         } catch (error) {
             console.error('Invalid credentials. Please try again.')
+            setError('Invalid credentials')
+        } finally {
+            setLoading(false)
         }
     }
     return (
@@ -30,6 +42,8 @@ const Login = () => {
                             <div className='mb-4'>
                                 <input type="password" placeholder="Set password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
                             </div>
+
+                            {error && <div className='text-danger'>{error}</div>}
                             {loading ? (
                                 <button type='submit' className='btn btn-info d-block mx-auto' disabled>Please wait...</button>
                             ) : (

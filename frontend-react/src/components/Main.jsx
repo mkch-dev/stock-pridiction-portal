@@ -9,7 +9,7 @@ const Main = () => {
                     <h1 className='text-light'>Stock Prediction Portal</h1>
                     <p className="text-light lead">This application is just a demo of stock prediction using Machine Learning.
                         Backend is Django and using Keras and LTSM model</p>
-                    <Button text='Login now' class="btn-outline-info" />
+                    <Button text='Explore now' class="btn-outline-info" url='/dashboard' />
                 </div>
             </div>
         </>
